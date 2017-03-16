@@ -25,7 +25,6 @@ jQuery(document).ready(function() {
 
   emulateConsoleForIE();
 
-  console.group('jQuery Colorbox log messages');
   //check if config JavaScript was successfully inserted. Load defaults otherwise.
   if(typeof jQueryColorboxSettingsArray !== 'object') {
     jQueryColorboxSettingsArray = getColorboxConfigDefaults();
@@ -42,7 +41,6 @@ jQuery(document).ready(function() {
     colorboxShowFlash();
   }
   colorboxSelector();
-  console.groupEnd();
 });
 
 /**
@@ -81,18 +79,14 @@ jQuery(document).ready(function() {
 (function(jQuery) {
   colorboxShowFlash = function() {
     jQuery(document).bind('cbox_closed', function() {
-      console.group('Showing flash objects');
       var flashObjects = document.getElementsByTagName("object");
       for (var i = 0; i < flashObjects.length; i++) {
-        console.debug('Show object %o',flashObjects[i]);
         flashObjects[i].style.visibility = "visible";
       }
       var flashEmbeds = document.getElementsByTagName("embed");
       for (var j = 0; j < flashEmbeds.length; j++) {
-        console.debug('Show embed %o',flashEmbeds[j]);
         flashEmbeds[j].style.visibility = "visible";
       }
-      console.groupEnd();
     });
   };
 })(jQuery);
@@ -107,18 +101,14 @@ jQuery(document).ready(function() {
 (function(jQuery) {
   colorboxHideFlash = function() {
     jQuery(document).bind('cbox_open', function() {
-      console.group('Hiding flash objects');
       var flashObjects = document.getElementsByTagName("object");
       for (var i = 0; i < flashObjects.length; i++) {
-        console.debug('Hide object %o',flashObjects[i]);
         flashObjects[i].style.visibility = "hidden";
       }
       var flashEmbeds = document.getElementsByTagName("embed");
       for (var j = 0; j < flashEmbeds.length; j++) {
-        console.debug('Hide embed %o',flashEmbeds[j]);
         flashEmbeds[j].style.visibility = "hidden";
       }
-      console.groupEnd();
     });
   };
 })(jQuery);
@@ -132,19 +122,16 @@ jQuery(document).ready(function() {
  */
 (function(jQuery) {
   colorboxAddClassToLinks = function() {
-    console.group('Add colorbox-link class to links pointing to images');
     jQuery("a:not(:contains(img))").each(function(index, link) {
       var $link = jQuery(link);
       var $linkClass = $link.attr("class");
       if ($linkClass !== undefined && !$linkClass.match('colorbox')) {
         var $linkHref = $link.attr("href");
         if ($linkHref !== undefined && jQuery(link).attr("href").match(COLORBOX_SUFFIX_PATTERN)) {
-          console.debug("Add colorbox-link class to %o.",$link);
           $link.addClass('colorbox-link');
         }
       }
     });
-    console.groupEnd();
   };
 })(jQuery);
 
@@ -157,16 +144,13 @@ jQuery(document).ready(function() {
  */
 (function(jQuery) {
   colorboxAddManualClass = function() {
-    console.group('Add colorbox-manual class to images');
     jQuery("img").each(function(index, image) {
       var $img = jQuery(image);
       var $imgClass = $img.attr("class");
       if ($imgClass === undefined || !$imgClass.match('colorbox')) {
-        console.debug('Add colorbox-manual class to image %o',$img);
         $img.addClass('colorbox-manual');
       }
     });
-    console.groupEnd();
   };
 })(jQuery);
 
@@ -179,9 +163,7 @@ jQuery(document).ready(function() {
  */
 (function(jQuery) {
   colorboxSelector = function() {
-    console.group('Find image links and apply colorbox effect.');
     jQuery("a:has(img[class*=colorbox-]):not(.colorbox-off)").each(function(index, link) {
-      console.group("Found link %o.",link);
       //create local copy of Colorbox array so that modifications can be made for every link
       ColorboxLocal = jQuery.extend(true,{},jQueryColorboxSettingsArray);
 
@@ -198,13 +180,9 @@ jQuery(document).ready(function() {
         //TODO: does not work, every link from an image will be opened in a colorbox...
         //colorboxLink(index, link,$linkHref)
       //}
-      console.groupEnd();
     });
-    console.groupEnd();
 
-    console.group('Find links and apply colorbox effect.');
     jQuery("a[class*=colorbox-link]").each(function(index, link) {
-      console.group("Found link %o.",link);
       //create local copy of Colorbox array so that modifications can be made for every link
       ColorboxLocal = jQuery.extend(true,{},jQueryColorboxSettingsArray);
 
@@ -212,9 +190,7 @@ jQuery(document).ready(function() {
       if ($linkHref !== undefined) {
         colorboxLink(index, link,$linkHref);
       }
-      console.groupEnd();
     });
-    console.groupEnd();
   };
 })(jQuery);
 
@@ -265,7 +241,6 @@ jQuery(document).ready(function() {
         if (jQueryColorboxSettingsArray.addZoomOverlay === "true") {
           colorboxAddZoomOverlayToImages(jQuery(link), $image);
         }
-        console.debug("Call colorbox for image %o.",$image);
         colorboxWrapper(link);
       }
     }
@@ -328,7 +303,6 @@ jQuery(document).ready(function() {
         ColorboxLocal.colorboxIframe = true;
       }
     }
-    console.debug("Call colorbox for link %o.",link);
     colorboxWrapper(link);
   };
 })(jQuery);
@@ -353,8 +327,6 @@ jQuery(document).ready(function() {
         ColorboxLocal[key] = true;
       }
     });
-
-    console.debug("Apply colorbox to link %o with values %o",link,ColorboxLocal);
 
     //finally call Colorbox library
     jQuery(link).colorbox({
@@ -434,7 +406,6 @@ jQuery(document).ready(function() {
  */
 (function (jQuery) {
   colorboxAddZoomOverlayToImages = function ($link, $image) {
-    console.debug("Add zoom hover to link %o",$link);
     var $zoomHover = jQuery('<span class="zoomHover" style="opacity: 0; margin: 0; padding: 0;"></span>');
 
     //add float from image to link, otherwise the zoom overlay would not be visible

@@ -1,4 +1,11 @@
-# Plugin Name #
+# jQuery-Colorbox #
+
+A forked version of original jQuery-Colorbox WordPress Plugin, which delete all the debug log in the browser console.
+
+If you hate the useless log, you may need this version of jQuery-Colorbox.
+
+Here are the original plugin information below.
+
 Contributors: techotronic  
 Donate link: http://www.techotronic.de/donate/  
 Tags: jquery, colorbox, lightbox, images, pictures, photos, gallery, javascript, overlay, nextgen gallery, nextgen-gallery, image, picture, photo, media, slideshow, ngg, mu  
