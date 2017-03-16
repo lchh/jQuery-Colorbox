@@ -1,8 +1,8 @@
 # jQuery-Colorbox #
 
-A forked version of original jQuery-Colorbox WordPress Plugin, which delete all the debug log in the browser console.
+**A forked version of original jQuery-Colorbox WordPress Plugin, which delete all the debug log in the browser console.**
 
-If you hate the useless log, you may need this version of jQuery-Colorbox.
+**If you hate the useless log, you may need this version of jQuery-Colorbox.**
 
 Here are the original plugin information below.
 
